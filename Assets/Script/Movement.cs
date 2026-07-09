@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
@@ -9,7 +8,7 @@ public class Movement : MonoBehaviour
     private float moveSpeed = 10f;
     
     protected Vector3 moveDirection;
-    private Rigidbody _rb;
+    protected Rigidbody _rb;
     
     [Header("Jumping")]
     [SerializeField, Tooltip("Set the force behind a jump."), Min(0)]
@@ -29,6 +28,12 @@ public class Movement : MonoBehaviour
     private bool _grounded;
     private MeshRenderer _renderer;
     private float PlayerHeight => _renderer.bounds.size.y;
+
+    [Header("Gravity")] 
+    [SerializeField, Tooltip("Enables custom gravity (ENSURE GRAVITY IS DISABLED IN THE RIGIDBODY).")] 
+    private bool customGravity;
+    [SerializeField, Tooltip("Set the gravity direction.")]
+    private Vector3 gravityDir = Physics.gravity;
     
     protected virtual void Start()
     {
@@ -45,6 +50,13 @@ public class Movement : MonoBehaviour
         MovePlayer();
 
         SpeedControl();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!customGravity) return;
+        
+        _rb.AddForce(gravityDir, ForceMode.Force);
     }
 
     /// <summary>
@@ -107,5 +119,14 @@ public class Movement : MonoBehaviour
     private void ReadyJump()
     {
         _jumpReady = true;
+    }
+
+    /// <summary>
+    /// Changes the gravity direction of this character.
+    /// </summary>
+    /// <param name="pGravityDir">The new gravity direction</param>
+    public void ChangeGravityDirection(Vector3 pGravityDir)
+    {
+        gravityDir = pGravityDir;
     }
 }

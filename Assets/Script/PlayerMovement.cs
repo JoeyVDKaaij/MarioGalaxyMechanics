@@ -11,6 +11,8 @@ public class PlayerMovement : Movement
 
     protected override void Start()
     {
+        base.Start();
+        
         moveRef.action.Enable();
         
         jumpRef.action.Enable();
@@ -29,6 +31,9 @@ public class PlayerMovement : Movement
     /// </summary>
     private void PlayerDirection()
     {
-        moveDirection = moveRef.action.ReadValue<Vector2>();
+        if (moveRef == null) return;
+        
+        Vector2 moveDirection2D = moveRef.action.ReadValue<Vector2>();
+        moveDirection = new Vector3(moveDirection2D.x, 0, moveDirection2D.y);
     }
 }
