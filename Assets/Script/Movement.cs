@@ -99,7 +99,7 @@ public class Movement : MonoBehaviour
     /// <summary>
     /// Makes the character jump.
     /// </summary>
-    protected void Jump(InputAction.CallbackContext ctx = new InputAction.CallbackContext())
+    protected void Jump()
     {
         if (!_jumpReady || !_grounded) return;
         

@@ -16,7 +16,7 @@ public class PlayerMovement : Movement
         moveRef.action.Enable();
         
         jumpRef.action.Enable();
-        jumpRef.action.performed += Jump;
+        jumpRef.action.performed += ctx => Jump();
     }
 
     protected override void Update()
