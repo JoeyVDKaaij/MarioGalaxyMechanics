@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 202749304}
   - component: {fileID: 202749309}
   - component: {fileID: 202749310}
+  - component: {fileID: 202749311}
   m_Layer: 0
   m_Name: Player Character
   m_TagString: Untagged
@@ -286,6 +287,19 @@ MonoBehaviour:
   gravityDir: {x: 0, y: -9.81, z: 0}
   moveRef: {fileID: 1030402594248063388, guid: 3ea9aa5ef03cd1040a2f2cc4629ad444, type: 3}
   jumpRef: {fileID: -176743189575952963, guid: 3ea9aa5ef03cd1040a2f2cc4629ad444, type: 3}
+  useCameraDirection: 1
+--- !u!114 &202749311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202749303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8676e9af39f8ed242b45000276ed6031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &265692716
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +440,6 @@ GameObject:
   - component: {fileID: 1183651316}
   - component: {fileID: 1183651310}
   - component: {fileID: 1183651314}
-  - component: {fileID: 1183651315}
   m_Layer: 0
   m_Name: Player 3rd Person Camera
   m_TagString: Untagged
@@ -453,7 +466,7 @@ MonoBehaviour:
       Size: {x: 0.2, y: 0.2}
     HardLimits:
       Enabled: 0
-      Size: {x: 0.8, y: 0.8}
+      Size: {x: 3, y: 0.9}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0.6, z: 0}
@@ -514,8 +527,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183651309}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1664307, y: 0.68724144, z: -0.16643067, w: 0.6872415}
-  m_LocalPosition: {x: -9.0372305, y: 5.469118, z: -0.0074691772}
+  m_LocalRotation: {x: -0.07472658, y: -0.000000028818421, z: -0.00000000215954, w: 0.99720407}
+  m_LocalPosition: {x: 0.49993992, y: -0.8595514, z: -9.439696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -533,58 +546,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3322ca50b2932543ab72b4fffcb769c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
---- !u!114 &1183651315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1183651309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineInputAxisController
-  ScanRecursively: 1
-  SuppressInputWhileBlending: 1
-  IgnoreTimeScale: 0
-  m_ControllerManager:
-    Controllers:
-    - Name: Look Orbit X
-      Owner: {fileID: 1183651316}
-      Enabled: 1
-      Input:
-        InputAction: {fileID: 2322451169601703517, guid: 3ea9aa5ef03cd1040a2f2cc4629ad444, type: 3}
-        Gain: 14.99
-        CancelDeltaTime: 0
-      InputValue: 0
-      Driver:
-        AccelTime: 0.2
-        DecelTime: 0.2
-    - Name: Look Orbit Y
-      Owner: {fileID: 1183651316}
-      Enabled: 1
-      Input:
-        InputAction: {fileID: 2322451169601703517, guid: 3ea9aa5ef03cd1040a2f2cc4629ad444, type: 3}
-        Gain: -1
-        CancelDeltaTime: 0
-      InputValue: 0
-      Driver:
-        AccelTime: 0.2
-        DecelTime: 0.2
-    - Name: Orbit Scale
-      Owner: {fileID: 1183651316}
-      Enabled: 1
-      Input:
-        InputAction: {fileID: 0}
-        Gain: -1
-        CancelDeltaTime: 0
-      InputValue: 0
-      Driver:
-        AccelTime: 0
-        DecelTime: 0
-  PlayerIndex: -1
-  AutoEnableInputs: 1
+  cameraInput: {fileID: 2322451169601703517, guid: 3ea9aa5ef03cd1040a2f2cc4629ad444, type: 3}
+  invertRotation: 0
+  rotateBasedOnPress: 0
+  horizontalSensitivity: 0.1
+  verticalSensitivity: 0.1
+  maxVerticalValue: 45
 --- !u!114 &1183651316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,7 +586,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 90
+    Value: 0
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -629,9 +596,9 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 17.5
+    Value: -19.4
     Center: 17.5
-    Range: {x: -10, y: 45}
+    Range: {x: -45, y: 45}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -735,8 +702,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367463842}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16643068, y: 0.68724144, z: -0.16643067, w: 0.6872415}
-  m_LocalPosition: {x: -4.7379904, y: 6.507058, z: 0.30561084}
+  m_LocalRotation: {x: -0.07472658, y: -0.000000028818423, z: -0.0000000021595403, w: 0.99720407}
+  m_LocalPosition: {x: 4.79918, y: 0.1783886, z: -9.1266165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -975,7 +942,7 @@ GameObject:
   - component: {fileID: 2126471177}
   - component: {fileID: 2126471176}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Atmosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
